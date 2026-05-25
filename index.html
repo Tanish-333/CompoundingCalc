@@ -6,15 +6,35 @@
   <title>Compound Interest Calculator – Free Tool for Early Retirement Planning | CompoundingCalc</title>
   <meta name="description" content="Use our free compound interest calculator to plan your early retirement. Instantly see how your money grows with accurate compounding. Includes a full expert guide.">
   <link rel="canonical" href="https://compoundingcalc.vercel.app/">
-  <meta property="og:title" content="Compound Interest Calculator | CompoundingCalc">
-  <meta property="og:description" content="Free compound interest calculator for early retirement. See exactly how your money grows over time.">
+  <!-- Favicon / tab icon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <meta name="theme-color" content="#1a365d">
+  <!-- SEO -->
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="CompoundingCalc">
+  <!-- Open Graph (social sharing + Google rich preview) -->
+  <meta property="og:title" content="Compound Interest Calculator – Plan Your Early Retirement | CompoundingCalc">
+  <meta property="og:description" content="Free compound interest calculator for early retirement. See exactly how your money grows over time with our accurate, instant compounding tool.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://compoundingcalc.vercel.app/">
+  <meta property="og:site_name" content="CompoundingCalc">
+  <meta property="og:image" content="https://compoundingcalc.vercel.app/favicon.svg">
+  <!-- Twitter / X card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Compound Interest Calculator | CompoundingCalc">
+  <meta name="twitter:description" content="Free compound interest calculator for early retirement planning. Instantly see how your money grows.">
+  <meta name="twitter:image" content="https://compoundingcalc.vercel.app/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"WebApplication","name":"CompoundingCalc","url":"https://compoundingcalc.vercel.app","applicationCategory":"FinanceApplication","operatingSystem":"Any","description":"Free compound interest calculator for early retirement planning","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  [
+    {"@context":"https://schema.org","@type":"WebApplication","name":"CompoundingCalc","url":"https://compoundingcalc.vercel.app","applicationCategory":"FinanceApplication","operatingSystem":"Any","description":"Free compound interest calculator for early retirement planning","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},
+    {"@context":"https://schema.org","@type":"Organization","name":"CompoundingCalc","url":"https://compoundingcalc.vercel.app","logo":"https://compoundingcalc.vercel.app/favicon.svg","contactPoint":{"@type":"ContactPoint","email":"tanishdave333@gmail.com","contactType":"customer support"}}
+  ]
   </script>
   <style>
     /* ---- Hero ---- */
@@ -698,7 +718,9 @@
 
     const panel = document.getElementById('results-panel');
     panel.classList.add('visible');
-    drawChart(snapshots);
+    // Defer chart draw one frame so the panel's layout is committed
+    // and canvas.offsetWidth returns the correct rendered width.
+    requestAnimationFrame(() => drawChart(snapshots));
     panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
@@ -795,6 +817,19 @@
       document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
       if (!isOpen) item.classList.add('open');
     });
+  });
+
+  // Redraw chart on window resize so it fills its container correctly
+  let _lastSnapshots = null;
+  const _origDraw = drawChart;
+  drawChart = function(data) { _lastSnapshots = data; _origDraw(data); };
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (_lastSnapshots) drawChart(_lastSnapshots);
+    }, 120);
   });
 
   // Run with defaults on load
