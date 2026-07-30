@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /compound-interest-guide.md
+
+# Google AdSense crawler — required to review page content for ad targeting
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+Sitemap: https://compoundingcalc.vercel.app/sitemap.xml

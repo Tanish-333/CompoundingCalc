@@ -88,7 +88,7 @@ The Compounding Calc shows raw mathematical growth, but taxes are a compounding 
 
 In a **Roth IRA**, contributions grow tax-free and qualified withdrawals are tax-free. In a **401(k) or traditional IRA**, contributions reduce your taxable income today and grow tax-deferred until withdrawal. For early retirement planners specifically, the **Roth conversion ladder** — systematically converting traditional IRA funds to Roth over several years before retirement — can create penalty-free access to funds before age 59½.
 
-For 2025, the IRS limits are $7,000 annually for IRAs ($8,000 if over 50) and $23,500 for 401(k) plans ($31,000 if over 50). Maxing these before investing in taxable accounts is the highest-leverage, lowest-risk move available to most investors.
+For 2026, the IRS limits are $7,500 annually for IRAs ($8,600 if over 50) and $24,500 for 401(k) plans ($32,500 if over 50). Maxing these before investing in taxable accounts is the highest-leverage, lowest-risk move available to most investors.
 
 ### Strategy 3: Pursue the Highest Risk-Adjusted Yield Available
 
